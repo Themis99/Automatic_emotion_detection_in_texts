@@ -1,8 +1,6 @@
 # Automatic Emotion Detection In Texts
 In this project we aim to detect emotion in texts. Specifically, we classify texts into six (6) emotion categories: Joy, Sadness, Anger, Fear, Surpise.
 
-
-
 ## Examples
 (1)
 
@@ -17,9 +15,7 @@ From the evaluation , we achieved an accuracy of 82.5% which is pretty high for 
 
 We also used W&B [2] library to visualize train and evaluation loss.
 
-
-
-
+![W B Chart 4_20_2022, 8_14_32 PM](https://user-images.githubusercontent.com/46052843/174455478-5bc1325a-a068-4601-b204-e0d5b1a11aea.png)
 
 Finaly we plot the confusion matrix
 
