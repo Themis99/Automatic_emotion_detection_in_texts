@@ -15,15 +15,17 @@ From the evaluation, we achieved an accuracy of 82.5% which is pretty high for m
 We also used W&B [2] library to visualize train and evaluation loss.
 ![W B Chart 4_20_2022, 8_14_32 PM](https://user-images.githubusercontent.com/46052843/174452980-c5a009a7-2925-48d0-9ba2-8a3459c34697.png)
 
-
-
-
 Finally, we plot the confusion matrix
 
 ![confmat](https://user-images.githubusercontent.com/46052843/174452917-cf85c478-0582-4a38-b6de-9445227ade04.png)
 
 From the confusion matrix, we can see that the model fails to classify the Surprise class,
 In the contrast, the model successfully classifies the Joy class.
+
+# How to run the scripts
+If you want to preprocess the data and train the model again you can use the train.txt, and test.txt dataset provided from the dataset (see above link). Then you can run the the preprocess.py and the train.py scripts respectively, after changing the paths. Then if you want to evaluate your model load your predictions change the paths and run the evaluation.py script.
+
+If you want to make a prediction use the predict.py script change the path to the model, write a text and run the script.
 
 ## References
 [1] Sanh, V., Debut, L., Chaumond, J., & Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. arXiv preprint arXiv:1910.01108.
