@@ -1,14 +1,11 @@
 # Automatic Emotion Detection In Texts
 In this project, we aim to detect emotion in texts. Specifically, we classify texts into six (6) emotion categories: Joy, Sadness, Anger, Fear, and surprise.
 
-
-
 ## Examples
-(1)
 
-(2)
-
-(3)
+![Exp1](https://user-images.githubusercontent.com/46052843/174455562-da74af9f-741b-40c4-9efb-c76f3248c748.png)
+![Exp2](https://user-images.githubusercontent.com/46052843/174455564-8d5d4f84-0d8e-4c9a-9d4d-78d96a0bd315.png)
+![Exp3](https://user-images.githubusercontent.com/46052843/174455566-231dbe09-2e03-4252-ba24-195829edce0f.png)
 
 The task of this project is a classical multi-task classification task for texts. Then we used to train and evaluate our model Dataset found in Kaggle: [(link)](https://www.kaggle.com/datasets/praveengovi/emotions-dataset-for-nlp) Where texts belong to one of the six aforementioned categories of emotions. The model we used is the DistilBert [1]. 
 
