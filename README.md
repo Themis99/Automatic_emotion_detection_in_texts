@@ -17,9 +17,9 @@ From the evaluation , we achieved an accuracy of 82.5% which is pretty high for 
 
 We also used W&B [2] library to visualize train and evaluation loss.
 
-(img)
 
-From the above image we can clearly see that the model slighly underfits.
+
+
 
 Finaly we plot the confusion matrix
 
@@ -27,4 +27,8 @@ Finaly we plot the confusion matrix
 
 From the confusion matrix we can clearly see that...
 
+## References
 
+[1]
+
+[2]
