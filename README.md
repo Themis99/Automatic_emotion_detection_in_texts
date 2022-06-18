@@ -23,9 +23,10 @@ We also used W&B [2] library to visualize train and evaluation loss.
 
 Finaly we plot the confusion matrix
 
-(img)
+![confmat](https://user-images.githubusercontent.com/46052843/174452917-cf85c478-0582-4a38-b6de-9445227ade04.png)
 
-From the confusion matrix we can clearly see that...
+From the confusion matrix we can clearly see that the model fails to classify the Surprise class,
+In the contrast the model successfully classifies the Joy class.
 
 ## References
 
