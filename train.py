@@ -1,12 +1,15 @@
 from transformers import DistilBertTokenizerFast, DistilBertConfig
 from transformers import DistilBertForSequenceClassification, Trainer, TrainingArguments
+from sklearn import preprocessing
 import pandas as pd
 import numpy as np
 import torch
 import wandb
 import os
+import pickle
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 torch_device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -24,12 +27,11 @@ class QuestiionDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.labels)
 
-
 if __name__ == '__main__':
 
-    # import data
+    #import data
     PATH_TRAIN = '/content/drive/MyDrive/personal projects/Github_projects/train.txt'
-    train_set = train_data = pd.read_csv(PATH_TRAIN, sep=';')
+    train_set = train_data = pd.read_csv(PATH_TRAIN,sep=';')
     train_set.columns = ['text', 'class']
 
     PATH_TEST = '/content/drive/MyDrive/personal projects/Github_projects/test.txt'
@@ -40,19 +42,24 @@ if __name__ == '__main__':
     test_set = test_set.tail(1000)
 
     classes = train_set['class'].value_counts().index.tolist()
-    labels = list(range(0, 6))
+    labels = list(range(0,6))
 
-    dict_map = {}
+    class_to_labels = {}
 
-    for i, j in zip(classes, labels):
-        dict_map[i] = j
+    for i ,j in zip(classes,labels):
+      class_to_labels[i]=j
+    
+    with open('/content/drive/MyDrive/personal projects/class_label.pkl', 'wb') as f:
+      pickle.dump(class_to_labels, f)
 
-    train_set = train_set.replace({"class": dict_map})
-    test_set = test_set.replace({"class": dict_map})
+    train_set = train_set.replace({"class": class_to_labels})
+    test_set = test_set.replace({"class": class_to_labels})
+
+
 
     wandb.login()
 
-    # prepare dataset
+    #prepare dataset
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
     train_encodings = tokenizer(train_set['text'].tolist(), truncation=True, padding=True)
     val_encodings = tokenizer(test_set['text'].tolist(), truncation=True, padding=True)
@@ -63,7 +70,8 @@ if __name__ == '__main__':
     model = DistilBertForSequenceClassification.from_pretrained('distilbert-base-uncased').to(torch_device)
     config = DistilBertConfig.from_pretrained('distilbert-base-uncased')
     config.num_labels = 6
-    model = DistilBertForSequenceClassification(config)
+    model = DistilBertForSequenceClassification(config) 
+  
 
     training_args = TrainingArguments(
         output_dir='./results',
@@ -96,5 +104,7 @@ if __name__ == '__main__':
     predictions = trainer.predict(val_dataset)
 
     preds = np.argmax(predictions.predictions, axis=-1)
+    preds = pd.Series(preds)
+    preds.to_csv('/content/drive/MyDrive/personal projects/predictions.csv')
 
     wandb.finish()

@@ -19,8 +19,11 @@ if __name__ == "__main__":
     text = 'I really do not understand why this happened, I thought the situation had normalized'
     res = inference(text,PATH)
 
-    emotions_dict = {'joy':0,'sadness':1,'anger':2,'fear':3,'love':4,'surprice':5}
-    key_list = list(emotions_dict.keys())
-    val_list = list(emotions_dict.values())
+
+    with open('/content/drive/MyDrive/personal projects/class_label.pkl', 'rb') as f:
+        class_to_labels = pickle.load(f)
+    
+    key_list = list(class_to_labels.keys())
+    val_list = list(class_to_labels.values())
     position = val_list.index(res)
     print(key_list[position])
